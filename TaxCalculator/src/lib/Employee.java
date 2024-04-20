@@ -30,6 +30,11 @@ public class Employee {
 
 	private List<String> childNames;
 	private List<String> childIdNumbers;
+
+	private static final int GRADE_1_SALARY = 3000000;
+	private static final int GRADE_2_SALARY = 5000000;
+	private static final int GRADE_3_SALARY = 7000000;
+	private static final double FOREIGNER_BONUS = 1.5;
 	
 	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
 		this.employeeId = employeeId;
@@ -52,22 +57,23 @@ public class Employee {
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
 	
-	public void setMonthlySalary(int grade) {	
-		if (grade == 1) {
-			monthlySalary = 3000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 2) {
-			monthlySalary = 5000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 3) {
-			monthlySalary = 7000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
+	public void setMonthlySalary(int grade) {
+		switch (grade) {
+			case 1:
+				monthlySalary = GRADE_1_SALARY;
+				break;
+			case 2:
+				monthlySalary = GRADE_2_SALARY;
+				break;
+			case 3:
+				monthlySalary = GRADE_3_SALARY;
+				break;
+			default:
+				throw new IllegalArgumentException("Invalid grade: " + grade);
+		}
+
+		if (isForeigner) {
+			monthlySalary *= FOREIGNER_BONUS; // Bonus hanya diterapkan sekali setelah gaji di-set.
 		}
 	}
 	

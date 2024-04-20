@@ -77,14 +77,19 @@ public class Employee {
 		}
 	}
 	
-	public void setAnnualDeductible(int deductible) {	
+	public void setAnnualDeductible(int deductible) {
+		if (deductible < 0) {
+			throw new IllegalArgumentException("Deductible cannot be negative");
+		}
 		this.annualDeductible = deductible;
 	}
-	
-	public void setAdditionalIncome(int income) {	
+
+	public void setAdditionalIncome(int income) {
+		if (income < 0) {
+			throw new IllegalArgumentException("Income cannot be negative");
+		}
 		this.otherMonthlyIncome = income;
 	}
-	
 	public void setSpouse(String spouseName, String spouseIdNumber) {
 		this.spouseName = spouseName;
 		this.spouseIdNumber = idNumber;
